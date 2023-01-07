@@ -20,6 +20,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
     "@types/styled-components": "^5.1.26",
+    "axios-esm": "^1.0.0",
     "framer-motion": "^7.6.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

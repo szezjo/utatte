@@ -795,6 +795,11 @@ axe-core@^4.4.3:
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.5.2.tgz#823fdf491ff717ac3c58a52631d4206930c1d9f7"
   integrity sha512-u2MVsXfew5HBvjsczCv+xlwdNnB1oQR9HlAcsejZttNjKKSkeDNVwB1vMThIUIFI9GoT57Vtk8iQLwqOfAkboA==
 
+axios-esm@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/axios-esm/-/axios-esm-1.0.0.tgz#2dfd44039ba4dc12203c103d72fc34002c98f8cd"
+  integrity sha512-uHmDS3+EcyRhWCopt9omxEnZEK1bzjcWsXi+Y1Nyj03iqtZS0Ye1ZrFSm4xyuszsiCTPOAJUmJ9t9Ou0WWvcRw==
+
 axobject-query@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-2.2.0.tgz#943d47e10c0b704aa42275e20edf3722648989be"

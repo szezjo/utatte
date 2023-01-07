@@ -21,11 +21,7 @@ const gradient = keyframes`
     }
 `;
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+export const BgContainer = styled.div`
   min-width: 100vw;
   min-height: 100vh;
   margin: 0;

@@ -1,21 +1,27 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { useEffect, useRef } from 'react';
-import { SingButton, SingButtonContent } from './styles';
+import React, { useEffect, useContext } from 'react';
+import { Container, SingButton, SingButtonContent, SingButtonContainer, Header, UtatteHeaderLogo } from './styles';
+import { useNavigate } from 'react-router-dom';
 
 function MainMenu() {
-  const audioRef = useRef(null);
+  const navigate = useNavigate();
 
   return (
     <>
-      <audio ref={audioRef} preload="auto" autoPlay>
-        <source src={`/bgMusic.ogg`} type="audio/ogg" />
-      </audio>
-      <SingButton
-        whileHover={{ scale: 1.2, backgroundColor: '#baa2d5ff', color: 'white' }}
-        transition={{ type: 'spring', duration: 0.25 }}
-      >
-        <SingButtonContent>śpiewaj!</SingButtonContent>
-      </SingButton>
+      <Container>
+        <Header>
+          <UtatteHeaderLogo src="/utatteLogo.svg" alt="Utatte Logo" />
+        </Header>
+        <SingButtonContainer>
+          <SingButton
+            initial={{ scale: 1.0, color: '#baa2d5', backgroundColor: '#baa2d500' }}
+            whileHover={{ scale: 1.2, backgroundColor: '#baa2d5ff', color: '#ffffff' }}
+            transition={{ type: 'spring', duration: 0.25 }}
+          >
+            <SingButtonContent onClick={() => navigate('/songs')}>śpiewaj!</SingButtonContent>
+          </SingButton>
+        </SingButtonContainer>
+      </Container>
     </>
   );
 }
