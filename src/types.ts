@@ -4,5 +4,8 @@ export type SongData = {
   artist: string;
   album: string;
   dirname: string;
+  romajiName: string;
+  romajiArtist: string;
+  romajiAlbum: string;
   duration: number;
 };

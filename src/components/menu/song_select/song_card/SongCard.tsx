@@ -9,7 +9,7 @@ type SongCardProps = {
 
 function SongCard({ name, artist, coverImg }: SongCardProps) {
   return (
-    <CardContainer>
+    <CardContainer initial={{ scale: 1.0 }} whileHover={{ scale: 1.1 }}>
       <CardImage coverImg={coverImg} />
       <CardContent>
         <CardTitle>{name}</CardTitle>
