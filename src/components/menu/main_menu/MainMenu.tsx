@@ -2,9 +2,16 @@
 import React, { useEffect, useContext } from 'react';
 import { Container, SingButton, SingButtonContent, SingButtonContainer, Header, UtatteHeaderLogo } from './styles';
 import { useNavigate } from 'react-router-dom';
+import BackgroundAudioPlayerContext from '../../../context/BackgroundAudioPlayerContext';
 
 function MainMenu() {
   const navigate = useNavigate();
+  const bgContext = useContext(BackgroundAudioPlayerContext);
+
+  useEffect(() => {
+    if (!bgContext) return;
+    bgContext.play();
+  });
 
   return (
     <>
