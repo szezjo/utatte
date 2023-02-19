@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SongCard from './song_card/SongCard';
 import { useGetSongsListQuery } from '../../../api';
 import { SongData } from '../../../types';
@@ -13,6 +13,10 @@ import {
   PageTitle,
   SongsContainer,
 } from './styles';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../hooks/rtkHooks';
+import { setSelectedSong } from '../../../features/songSelect';
+import PreviewAudioPlayerContext from '../../../context/PreviewAudioPlayerContext';
 
 const address = import.meta.env.VITE_SERVER_ADDRESS;
 
@@ -29,6 +33,12 @@ function SongSelect() {
   if (isLoading) console.log('loading');
   if (isSuccess) console.log(songList);
   if (isError) console.error(error);
+  const navigate = useNavigate();
+
+  const prContext = useContext(PreviewAudioPlayerContext);
+  useEffect(() => {
+    if (prContext) prContext.unload();
+  }, []);
 
   const fetchImage = async (imageUrl: string) => {
     const res = await fetch(imageUrl);
@@ -75,6 +85,27 @@ function SongSelect() {
     // }
   }, [songList, isSuccess]);
 
+  const dispatch = useAppDispatch();
+  const navigateToSongOptions = (song: SongDataWithCover) => {
+    dispatch(
+      setSelectedSong({
+        name: song.name,
+        artist: song.artist,
+        album: song.album,
+        releaseYear: 2017,
+        genre: 'j-rock',
+        lang: 'jp',
+        time: song.duration,
+        previewTime: song.previewStart,
+        isScoreModeSupported: false,
+        lyrics: [],
+        coverUrl: song.coverImage,
+        apiSongId: song.id,
+      }),
+    );
+    navigate('/songTest');
+  };
+
   if (isSuccess && songsWithCovers.length === songList.length)
     return (
       <Container>
@@ -90,7 +121,13 @@ function SongSelect() {
               <SongTableContainer>
                 <SongTable>
                   {group.songs.map((item: SongDataWithCover) => (
-                    <SongCard name={item.name} artist={item.artist} coverImg={item.coverImage} key={item.dirname} />
+                    <SongCard
+                      name={item.name}
+                      artist={item.artist}
+                      coverImg={item.coverImage}
+                      key={item.dirname}
+                      onClick={() => navigateToSongOptions(item)}
+                    />
                   ))}
                 </SongTable>
               </SongTableContainer>

@@ -18,7 +18,11 @@
     ]
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.9.1",
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-regular-svg-icons": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "@reduxjs/toolkit": "^1.9.2",
     "@types/styled-components": "^5.1.26",
     "axios-esm": "^1.0.0",
     "framer-motion": "^7.6.19",
@@ -26,7 +30,7 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.5",
-    "redux": "^4.2.0",
+    "redux": "^4.2.1",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {

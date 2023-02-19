@@ -3,6 +3,7 @@ import React, { createContext } from 'react';
 //const BackgroundAudioPlayerContext = createContext<React.MutableRefObject<HTMLAudioElement | null> | null>(null);
 export type TBackgroundAudioPlayerContext = {
   ref: React.MutableRefObject<HTMLAudioElement | null>;
+  play: () => void;
   pause: () => void;
 };
 

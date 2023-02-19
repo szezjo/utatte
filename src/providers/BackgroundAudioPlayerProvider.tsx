@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect, useRef } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import BackgroundAudioPlayer from '../components/audio/BackgroundAudioPlayer';
 import BackgroundAudioPlayerContext, { TBackgroundAudioPlayerContext } from '../context/BackgroundAudioPlayerContext';
 
@@ -19,14 +19,13 @@ function BackgroundAudioPlayerProvider({ children }: BackgroundAudioPlayerProvid
     bgAudioRef.current.pause();
   };
 
-  useEffect(() => {
-    play();
-  }, []);
-
   const providerValue: TBackgroundAudioPlayerContext = {
     ref: bgAudioRef,
+    play: play,
     pause: pause,
   };
+
+  useEffect(() => play(), []);
 
   return (
     <>

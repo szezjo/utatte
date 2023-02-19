@@ -8,4 +8,10 @@ export type SongData = {
   romajiArtist: string;
   romajiAlbum: string;
   duration: number;
+  previewStart: number;
+};
+
+export type SourceData = {
+  source: string;
+  previewTime: number;
 };

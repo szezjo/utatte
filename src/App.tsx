@@ -5,27 +5,27 @@ import StartScreen from './components/menu/start_screen/StartScreen';
 import StartView from './components/menu/StartView';
 import './App.css';
 import SongSelect from './components/menu/song_select/SongSelect';
-import BackgroundAudioPlayerProvider from './providers/BackgroundAudioPlayerProvider';
-import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
-import { api } from './api';
+import GeneralAudioProvider from './providers/GeneralAudioProvider';
+import SongOptions from './components/menu/song_select/song_options/SongOptions';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 function App() {
   return (
-    <>
-      <BackgroundAudioPlayerProvider>
-        <ApiProvider api={api}>
-          <Router>
-            <Routes>
-              <Route path="/" element={<StartView />}>
-                <Route path="" element={<StartScreen />} />
-                <Route path="menu" element={<MainMenu />} />
-              </Route>
-              <Route path="/songs" element={<SongSelect />} />
-            </Routes>
-          </Router>
-        </ApiProvider>
-      </BackgroundAudioPlayerProvider>
-    </>
+    <Provider store={store}>
+      <GeneralAudioProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<StartView />}>
+              <Route path="" element={<StartScreen />} />
+              <Route path="menu" element={<MainMenu />} />
+            </Route>
+            <Route path="/songs" element={<SongSelect />} />
+            <Route path="/songTest" element={<SongOptions />} />
+          </Routes>
+        </Router>
+      </GeneralAudioProvider>
+    </Provider>
   );
 }
 
