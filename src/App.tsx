@@ -21,7 +21,7 @@ function App() {
               <Route path="menu" element={<MainMenu />} />
             </Route>
             <Route path="/songs" element={<SongSelect />} />
-            <Route path="/songTest" element={<SongOptions />} />
+            <Route path="/songOptions" element={<SongOptions />} />
           </Routes>
         </Router>
       </GeneralAudioProvider>

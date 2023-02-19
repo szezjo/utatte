@@ -103,7 +103,7 @@ function SongSelect() {
         apiSongId: song.id,
       }),
     );
-    navigate('/songTest');
+    navigate('/songOptions');
   };
 
   if (isSuccess && songsWithCovers.length === songList.length)
