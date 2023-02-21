@@ -41,10 +41,17 @@ function PreviewAudioPlayerProvider({ children }: PreviewAudioPlayerProviderProp
     if (bgContext) bgContext.play();
   };
 
+  const stop = (): void => {
+    if (!src.source.length || !prAudioRef || !prAudioRef.current) return;
+    prAudioRef.current.pause();
+    setSrc({ source: '', previewTime: 0 });
+  };
+
   const providerValue: TPreviewAudioPlayerContext = {
     ref: prAudioRef,
     pause: pause,
     unload: unload,
+    stop: stop,
     setSrc: setSrc,
   };
 

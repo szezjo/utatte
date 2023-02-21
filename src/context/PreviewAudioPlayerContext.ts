@@ -6,6 +6,7 @@ export type TPreviewAudioPlayerContext = {
   ref: React.MutableRefObject<HTMLAudioElement | null>;
   pause: () => void;
   unload: () => void;
+  stop: () => void;
   setSrc: (src: SourceData) => void;
 };
 

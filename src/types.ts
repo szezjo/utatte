@@ -9,6 +9,7 @@ export type SongData = {
   romajiAlbum: string;
   duration: number;
   previewStart: number;
+  freeModeOnly: boolean;
 };
 
 export type SourceData = {

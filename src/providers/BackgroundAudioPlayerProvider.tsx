@@ -19,10 +19,17 @@ function BackgroundAudioPlayerProvider({ children }: BackgroundAudioPlayerProvid
     bgAudioRef.current.pause();
   };
 
+  const reset = (): void => {
+    if (!bgAudioRef || !bgAudioRef.current) return;
+    bgAudioRef.current.load();
+    bgAudioRef.current.play();
+  };
+
   const providerValue: TBackgroundAudioPlayerContext = {
     ref: bgAudioRef,
     play: play,
     pause: pause,
+    reset: reset,
   };
 
   useEffect(() => play(), []);
