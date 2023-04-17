@@ -5,6 +5,7 @@ export type TBackgroundAudioPlayerContext = {
   ref: React.MutableRefObject<HTMLAudioElement | null>;
   play: () => void;
   pause: () => void;
+  reset: () => void;
 };
 
 const BackgroundAudioPlayerContext = createContext<TBackgroundAudioPlayerContext | null>(null);

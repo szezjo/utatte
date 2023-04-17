@@ -97,7 +97,7 @@ function SongSelect() {
         lang: 'jp',
         time: song.duration,
         previewTime: song.previewStart,
-        isScoreModeSupported: false,
+        isScoreModeSupported: !song.freeModeOnly,
         lyrics: [],
         coverUrl: song.coverImage,
         apiSongId: song.id,

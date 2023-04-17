@@ -25,11 +25,13 @@ import {
   OptionsStack,
   ModesButtonsWrapper,
   PhotoBackground,
+  CircularButtonDisabled,
 } from './styles';
-import { useAppSelector } from '../../../../hooks/rtkHooks';
+import { useAppDispatch, useAppSelector } from '../../../../hooks/rtkHooks';
 import PreviewAudioPlayerContext from '../../../../context/PreviewAudioPlayerContext';
 import { useNavigate } from 'react-router-dom';
 import OptionCard from './option_card/OptionCard';
+import { setPlayingSong } from '../../../../features/songPlayer';
 
 // type SongOptionsProps = {
 //   name: string;
@@ -53,12 +55,23 @@ const convertTime = (sec: number) => {
 const address = import.meta.env.VITE_SERVER_ADDRESS;
 
 function SongOptions() {
-  const { name, artist, releaseYear, album, genre, lang, time, previewTime, apiSongId, coverUrl } = useAppSelector(
-    (state) => state.songSelect,
-  );
+  const {
+    name,
+    artist,
+    releaseYear,
+    album,
+    genre,
+    lang,
+    time,
+    previewTime,
+    apiSongId,
+    coverUrl,
+    isScoreModeSupported,
+  } = useAppSelector((state) => state.songSelect);
 
   const [isFreeModeSelected, setIsFreeModeSelected] = useState(false);
   const [difficultyLevel, setDifficultyLevel] = useState(0);
+  const [song, setSong] = useState('');
   const [musicType, setMusicType] = useState(0);
   const [lyricsType, setLyricsType] = useState(0);
   const [bgType, setBgType] = useState(0);
@@ -68,7 +81,12 @@ function SongOptions() {
     if (!name.length && apiSongId === -1) navigate('/');
   }, []);
 
+  useEffect(() => {
+    if (!isScoreModeSupported) setIsFreeModeSelected(true);
+  }, [isScoreModeSupported]);
+
   const context = useContext(PreviewAudioPlayerContext);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const fetchSong = async () => {
@@ -77,12 +95,21 @@ function SongOptions() {
       const songBlob = await res.blob();
       const songObjectUrl = URL.createObjectURL(songBlob);
 
+      setSong(songObjectUrl);
       if (context) context.setSrc({ source: songObjectUrl, previewTime });
       else console.log('context error');
     };
 
     fetchSong();
   }, [apiSongId]);
+
+  const startSong = () => {
+    if (!context) return;
+
+    dispatch(setPlayingSong({ audioFile: song, apiSongId: apiSongId, freeMode: isFreeModeSelected }));
+    context.stop();
+    navigate('/game', { replace: true });
+  };
 
   const infoHeader = (
     <Header>
@@ -125,19 +152,25 @@ function SongOptions() {
           <SubStack>
             <ModesStack>
               <ModesButtonsWrapper>
-                <CircularButton
-                  isFreeModeSelected={isFreeModeSelected}
-                  initial={{
-                    scale: 1.0,
-                  }}
-                  whileHover={{
-                    scale: 1.05,
-                  }}
-                  transition={{ type: 'spring', duration: 0.25 }}
-                  onClick={() => setIsFreeModeSelected(false)}
-                >
-                  <CircularButtonContent>tryb punktacji</CircularButtonContent>
-                </CircularButton>
+                {isScoreModeSupported ? (
+                  <CircularButton
+                    isFreeModeSelected={isFreeModeSelected}
+                    initial={{
+                      scale: 1.0,
+                    }}
+                    whileHover={{
+                      scale: 1.05,
+                    }}
+                    transition={{ type: 'spring', duration: 0.25 }}
+                    onClick={() => setIsFreeModeSelected(false)}
+                  >
+                    <CircularButtonContent>tryb punktacji</CircularButtonContent>
+                  </CircularButton>
+                ) : (
+                  <CircularButtonDisabled>
+                    <CircularButtonContent>tryb punktacji</CircularButtonContent>
+                  </CircularButtonDisabled>
+                )}
                 <SmallerCircularButton
                   isFreeModeSelected={isFreeModeSelected}
                   initial={{
@@ -154,7 +187,7 @@ function SongOptions() {
               </ModesButtonsWrapper>
             </ModesStack>
             <ImageContainer>
-              <CoverImage src={coverUrl} />
+              <CoverImage src={coverUrl} onClick={startSong} />
             </ImageContainer>
             <OptionsStack>
               <OptionCard

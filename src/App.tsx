@@ -9,6 +9,8 @@ import GeneralAudioProvider from './providers/GeneralAudioProvider';
 import SongOptions from './components/menu/song_select/song_options/SongOptions';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import PreSetup from './components/game/preSetup';
+import End from './components/game/end';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
             </Route>
             <Route path="/songs" element={<SongSelect />} />
             <Route path="/songOptions" element={<SongOptions />} />
+            <Route path="/game" element={<PreSetup />} />
+            <Route path="/end" element={<End />} />
           </Routes>
         </Router>
       </GeneralAudioProvider>

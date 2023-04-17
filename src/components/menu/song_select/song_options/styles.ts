@@ -175,6 +175,21 @@ export const CircularButton = styled(motion.div)<ButtonProps>`
   }
 `;
 
+export const CircularButtonDisabled = styled(motion.div)`
+  position: relative;
+  width: 20vw;
+  border-radius: 50%;
+  border: #bbb 0.5vw solid;
+  background-color: #bbb;
+  color: #fff;
+
+  &:after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+  }
+`;
+
 export const CircularButtonContent = styled.div`
   position: absolute;
   width: 100%;
